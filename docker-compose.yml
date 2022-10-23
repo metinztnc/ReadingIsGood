@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    container_name: readingisgooddocker
+    image: readingisgooddocker
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    networks:
+      - getir-network
+    environment:
+      DATASOURCE_HOST: postgres-db
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: getir
+      POSTGRES_PASSWORD: getir
+      POSTGRES_DB: getir
+    networks:
+      - getir-network
+#    volumes:
+#      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+networks:
+  getir-network:
