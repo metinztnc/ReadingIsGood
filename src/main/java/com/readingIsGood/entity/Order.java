@@ -42,6 +42,7 @@ public class Order {
     /**
      * Ordered books in List type
      */
+    @OneToMany
     private List<Book> bookList = new ArrayList<>();
     /**
      * Order createDate time in LocalDateTime type.
